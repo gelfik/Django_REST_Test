@@ -111,18 +111,7 @@ class UserDataAPIView(RetrieveUpdateAPIView):
     serializer_class = UserDataSerializer
 
     def get(self, request, *args, **kwargs):
-        serializer_data = {}
-        username = request.data.get('username', None)
-        if username:
-            serializer_data.update(username=username)
-        email = request.data.get('email', None)
-        if email:
-            serializer_data.update(email=email)
-        password = request.data.get('password', None)
-        if password:
-            serializer_data.update(password=password)
-        # Паттерн сериализации, валидирования и сохранения - то, о чем говорили
-        serializer = self.serializer_class(request.user, data=serializer_data, partial=True)
+        serializer = self.serializer_class(request.user, data={}, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
 
