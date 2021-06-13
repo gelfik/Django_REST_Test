@@ -19,9 +19,8 @@ def core_exception_handler(exc, context):
         # случае, вернуть ответ сгенерированный стандартными средствами заранее
         return handlers[exception_class](exc, context, response)
 
-    if response is not None:
-        response.data['status_code'] = response.status_code
-        response.data['errors'] = exc.detail
+    # if response is not None:
+    #     response.data['status_code'] = response.status_code
 
     return response
 
